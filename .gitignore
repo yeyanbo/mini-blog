@@ -1,0 +1,4 @@
+/target
+/.vscode
+*.lock
+/blog/*.md

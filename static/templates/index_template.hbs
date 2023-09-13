@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/png" href="/img/favicon.ico" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon.ico">
+    <title>BigQ Blog</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <center>
+        <div class="content">
+            <header>
+                <a href="/">BigQ Blog</a>
+                <center class="category-list">
+                    <a href="/category/Uncategorized">Uncategorized</a>
+                    {{#each md.categories as |category| }}
+                     | 
+                    <a href="/tag/{{category}}">{{category}}</a>
+                    {{/each}}
+                </center>
+            </header>
+
+            <div class="grid-container">
+                <section id="writing">
+                    <ul class="post-list">
+                        {{#each metadata as |md| }}
+                        <li class="post-item">
+                            <a href="post/{{md.name}}">{{md.title}}</a>
+                            <div class="meta">
+                                 <span class="category"><a href="">Architecture</a></span>
+                                 | 
+                                {{#each md.tags as |tag| }}
+                                <span class="tag"><a href="/tag/{{tag}}">{{tag}}</a></span>, 
+                                {{/each}}
+                                 |  
+                                <time datetime="{{date}}">{{date}}</time>
+                            </div>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </section>
+                <aside>
+                    <p class="tag-cloud">
+                        <a href="">Rust</a>
+                        <a href="">Java</a>
+                        <a href="">TOGAF</a>
+                        <a href="">Rust</a>
+                        <a href="">C++</a>
+                        <a href="">Architecture</a>
+                    </p>
+                </aside>
+            </div>
+            <footer>
+                <div class="line"></div>
+                <br>
+                <center class="footer">
+                    <span>@BigQ Studio 2023; Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>; Powered by <a href="http://app.yeyanbo.cn/mini-blog">mini-blog</a>, rev 0.2.20230814</span>
+                    <span>冀ICP备2022004935号-1</span>
+                </center>
+                <br>
+            </footer>
+        </div>
+    </center>
+</body>
+</html>

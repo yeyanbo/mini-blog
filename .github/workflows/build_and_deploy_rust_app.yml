@@ -1,0 +1,69 @@
+name: Build and Deploy Rust Web Server
+
+on:
+  push:
+    tags:
+      - "[0-9]+.[0-9]+"
+  
+permissions:
+  contents: write
+
+jobs:
+  build_and_upload:
+      runs-on: ${{ matrix.os }}
+
+      strategy:
+        matrix:
+          # You can add more, for any target you'd like!
+          include:
+            - build: linux
+              os: ubuntu-latest
+              target: x86_64-unknown-linux-musl
+  
+            - build: macos
+              os: macos-latest
+              target: x86_64-apple-darwin
+
+      steps:
+        - name: Install Rust
+          uses: dtolnay/rust-toolchain@stable
+          with:
+            targets: ${{ matrix.target }}
+
+        - name: Checkout
+          uses: actions/checkout@v3
+
+        - name: Release Version
+          shell: bash
+          run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+        - name: Build
+          uses: actions-rs/cargo@v1
+          with:
+            use-cross: true
+            command: build
+            args: --verbose --release --target x${{ matrix.target }}
+          
+        - name: Package
+          shell: bash
+          run: |
+            binname="mini-blog"
+
+            dirname="$binname-${{ env.VERSION }}-${{ matrix.target }}"
+            mkdir "$dirname"
+
+            mv "target/${{ matrix.target }}/release/$binname" "$dirname"
+            mv "static/" "$dirname"
+            mv "LICENSE" "$dirname"
+            mv "README.md" "$dirname"
+
+            mkdir "$dirname/blog"
+
+            tar -czf "$dirname.tar.gz" "$dirname"
+            echo "ASSET=$dirname.tar.gz" >> $GITHUB_ENV
+
+        - name: Release
+          uses: softprops/action-gh-release@v1
+          with:
+            files: |
+              ${{ env.ASSET }}

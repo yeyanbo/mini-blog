@@ -9,10 +9,10 @@
 
 读取指定目录下的Markdown文件，形成目录，并展示为HTML页面。
 
-[v] 读取目录下的文件，形成目录页
-[v] 读取Markdown文件，展示为Html页面
-[ ] 标签云（Tag）
-[ ] 分类（Category）
+- [v] 读取目录下的文件，形成目录页
+- [v] 读取Markdown文件，展示为Html页面
+- [ ] 标签云（Tag）
+- [ ] 分类（Category）
 
 ## Markdown特殊格式
 

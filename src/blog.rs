@@ -22,7 +22,10 @@ pub fn workthrough() -> anyhow::Result<PostList> {
         .filter(|p| {
             let path = p.as_ref().unwrap().path();
             println!(">>>>>>{:?}", &path);
-            path.extension().unwrap() == "md"
+
+            //fixed: .DS_Store error
+            let ext = path.extension();
+            ext.is_some() && ext.unwrap() == "md"
         })
         .for_each(|p| {
             let path = p.as_ref().unwrap().path();
@@ -38,7 +41,7 @@ fn read_file_matadata(path: &PathBuf) -> anyhow::Result<PostMetadata> {
     let ppp = String::from(pp.to_string_lossy());
 
     let file = File::open(path)?;
-    let mut buf = BufReader::new(file);
+    let buf = BufReader::new(file);
 
     let mut md = PostMetadata::default();
     md.name = ppp.replace(".md", "");

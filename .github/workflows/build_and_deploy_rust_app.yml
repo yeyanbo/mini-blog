@@ -42,7 +42,7 @@ jobs:
           with:
             use-cross: true
             command: build
-            args: --verbose --release --target x${{ matrix.target }}
+            args: --verbose --release --target ${{ matrix.target }}
           
         - name: Package
           shell: bash

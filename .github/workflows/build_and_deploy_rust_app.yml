@@ -55,10 +55,10 @@ jobs:
             mv "target/${{ matrix.target }}/release/$binname" "$dirname"
             mv "static/" "$dirname"
             mv "LICENSE" "$dirname"
-            mv "README.md" "$dirname"
 
             mkdir "$dirname/blog"
-
+            mv "README.md" "$dirname/blog"
+            
             tar -czf "$dirname.tar.gz" "$dirname"
             echo "ASSET=$dirname.tar.gz" >> $GITHUB_ENV
 

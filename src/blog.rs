@@ -4,7 +4,6 @@ use std::fs::{DirEntry, File};
 use std::io::{BufReader, BufRead};
 use std::path::PathBuf;
 use std::sync::MutexGuard;
-use std::time::SystemTime;
 use str_utils::StartsWithIgnoreAsciiCase;
 
 use anyhow::Ok;
@@ -17,7 +16,7 @@ use crate::model::{Cache, Post, PostMetadata};
 /// 判断是否需要重新加载所有的Markdown文件元数据
 /// 根据Markdown文件的创建时间（文件的属性，不需要加载并解析文件获得）与参数时间进行比对
 /// 如果创建时间 > 参数时间，则需要重新加载；否则不需要
-pub fn need_reload(date: SystemTime) -> bool {
+pub fn need_reload(date: i64) -> bool {
 
     let entry = fs::read_dir(PathBuf::from("blog")).unwrap()
         .into_iter()
@@ -27,7 +26,8 @@ pub fn need_reload(date: SystemTime) -> bool {
     match entry {
         None => false,
         Some(ent) => {
-            let lasted = fs::metadata(ent.unwrap().path()).unwrap().created().unwrap();
+            let lasted = get_file_created(ent.unwrap().path());
+            // fs::metadata().unwrap().created().unwrap();
             lasted.ge(&date)
         }
     }
@@ -36,7 +36,7 @@ pub fn need_reload(date: SystemTime) -> bool {
 pub fn work_through(cache: &mut MutexGuard<Cache>) {
     let mut metadata = Vec::new();
 
-    let mut lasted: Option<SystemTime> = None;
+    let mut lasted: Option<i64> = None;
 
     fs::read_dir(PathBuf::from("blog")).unwrap()
         .into_iter()
@@ -58,7 +58,7 @@ pub fn work_through(cache: &mut MutexGuard<Cache>) {
 
             metadata.push(post_md);
 
-            let created = fs::metadata(&path).unwrap().created().unwrap();
+            let created = get_file_created(path);
             match lasted {
                 None => {lasted = Some(created) },
                 Some(lasted2) => { if created > lasted2 {lasted = Some(created)}},

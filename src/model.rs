@@ -1,6 +1,5 @@
 use std::collections::{HashMap, HashSet};
 use std::sync::{Arc, Mutex};
-use std::time::SystemTime;
 use chrono::NaiveDate;
 use axum_template::engine::Engine;
 use handlebars::Handlebars;
@@ -28,7 +27,7 @@ pub struct Cache {
     pub metadata: HashMap<String, PostMetadata>,
     pub category_cloud: HashSet<String>,
     pub tag_cloud: HashSet<String>,
-    pub lasted_update: Option<SystemTime>,
+    pub lasted_update: Option<i64>,
 }
 
 impl Cache {

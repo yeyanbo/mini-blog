@@ -119,10 +119,24 @@ pub fn file_created_order(a: &DirEntry, b: &DirEntry) -> Ordering {
     let path_a = a.path();
     let path_b = b.path();
 
-    let date_a = fs::metadata(path_a).unwrap().created().unwrap();
-    let date_b = fs::metadata(path_b).unwrap().created().unwrap();
+    let date_a = get_file_created(path_a);
+    let date_b = get_file_created(path_b);
 
     date_a.cmp(&date_b)
+}
+
+#[cfg(target_os = "macos")]
+pub fn get_file_created(path: PathBuf) -> i64 {
+    let meta = fs::metadata(path).unwrap();
+    use std::os::unix::fs::MetadataExt;
+    meta.ctime()
+}
+
+#[cfg(target_os = "linux")]
+pub fn get_file_created(path: PathBuf) -> i64 {
+    let meta = fs::metadata(path).unwrap();
+    use std::os::linux::fs::MetadataExt;
+    meta.st_ctime()
 }
 
 ///

@@ -1,6 +1,6 @@
 use std::cmp::Ordering;
 use std::fs;
-use std::fs::{DirEntry, File, metadata};
+use std::fs::{DirEntry, File};
 use std::io::{BufReader, BufRead};
 use std::path::PathBuf;
 use std::sync::MutexGuard;

@@ -54,6 +54,7 @@ jobs:
 
             mv "target/${{ matrix.target }}/release/$binname" "$dirname"
             mv "static/" "$dirname"
+            mv "config.yml" "$dirname"
             mv "LICENSE" "$dirname"
 
             mkdir "$dirname/blog"

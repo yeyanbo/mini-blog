@@ -16,8 +16,6 @@ pub struct Settings {
 
 impl Settings {
     pub fn new() -> Result<Self, ConfigError> {
-        let mut conf = Config::default();
-
         let conf = Config::builder()
             .add_source(File::with_name("config.yml"))
             .build()?;

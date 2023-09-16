@@ -1,5 +1,3 @@
-#![feature(default_free_fn)]
-
 pub mod model;
 pub mod web;
 pub mod blog;

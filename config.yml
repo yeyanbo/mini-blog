@@ -1,0 +1,6 @@
+title: BigQ Blog
+organization: BigQ Studio 2023-2024
+backup-number: 冀ICP备2022004935号-1
+
+app-port: 3000
+log-level: info

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/png" href="/img/favicon.ico" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>{{> title }}</title>
+</head>
+
+<body>
+    <center>
+        <div class="content">
+            <header>
+                <a href="/">{{> title }}</a>
+                <center class="category-list">
+                    <a href="/category/Uncategorized">Uncategorized</a>
+                    {{#each category_cloud as |category| }}
+                        |
+                        <a href="/category/{{category}}">{{category}}</a>
+                    {{/each}}
+                </center>
+            </header>
+
+            <section id="writing">
+                <h2 class="filter">Tags: {{filter}}</h2>
+                <ul class="post-list">
+                    {{#each metadata as |md| }}
+                    <li class="post-item">
+                        <a href="../post/{{md.name}}">{{md.title}}</a>
+                        <div class="meta">
+                            {{{ md.categories }}}
+                            |
+                            {{{ md.tags }}}
+                             |
+                            <time datetime="{{date}}">{{date}}</time>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ul>
+            </section>
+
+            {{> footer }}
+        </div>
+    </center>
+</body>
+</html>

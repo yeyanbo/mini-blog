@@ -125,12 +125,17 @@ article>h1 {
     font-weight: bolder;
 }
 
+.filter {
+    text-align: left;
+    margin-left: 36px;
+}
+
 .category-line {
     display: flex;
     margin-top: 20px;
 }
 
-.category-item {
+.category-item a {
     font-size: 0.9rem !important;
     letter-spacing: 0em;
     color: #e8e8e8;
@@ -152,7 +157,7 @@ time {
     margin-top: 5px;
 }
 
-.tag-item {
+.tag-item a {
     letter-spacing: 0em;
     color: #e8e8e8;
     background-color: cadetblue;

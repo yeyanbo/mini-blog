@@ -6,52 +6,44 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     <link rel="icon" type="image/png" href="/img/favicon.ico" sizes="192x192">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon.ico">
-    <title>BigQ Blog</title>
     <link rel="stylesheet" href="/static/css/style.css">
+    <title>{{> title }}</title>
 </head>
 
 <body>
     <center>
     <div class="content">
         <header>
-            <a href="/">BigQ Blog</a>
+            <a href="/">{{> title }}</a>
             <center class="category-list">
                 <a href="/category/Uncategorized">Uncategorized</a>
-                {{#each md.categories as |category| }}
+                {{#each category_cloud as |category| }}
                     | 
-                <a href="/tag/{{category}}">{{category}}</a>
+                <a href="/category/{{category}}">{{category}}</a>
                 {{/each}}
             </center>
         </header>
 
         <article>
             <div class="category-line">
-                {{#each categories as |c| }}
-                <span class="category-item">{{c}}</span>
+                {{#each post.categories as |category| }}
+                <span class="category-item"><a href="/category/{{category}}">{{category}}</a></span>
                 {{/each}}
             </div>
-            <h1>{{title}}</h1>
+            <h1>{{post.title}}</h1>
             <time datetime="{{date}}">{{date}}</time>
             <div class="tag-line">
-                {{#each tags as |tag| }}
-                <span class="tag-item">{{tag}}</span>
+                {{#each post.tags as |tag| }}
+                    <span class="category-item"><a href="/tag/{{tag}}">{{tag}}</a></span>
                 {{/each}}
             </div>
 
             <section>
-                {{{content}}}
+                {{{post.content}}}
             </section>
         </article>
 
-        <footer>
-            <div class="line"></div>
-            <br>
-            <center class="footer">
-                    <span>@BigQ Studio 2023; Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>; Powered by <a href="http://app.yeyanbo.cn/mini-blog">mini-blog</a>, rev 0.2.20230814</span>
-                    <span>冀ICP备2022004935号-1</span>
-                </center>
-            <br>
-        </footer>
+        {{> footer }}
     </div>
     </center>
 </body>

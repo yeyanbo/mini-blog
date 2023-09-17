@@ -34,10 +34,11 @@ pub fn need_reload(date: i64) -> bool {
 }
 
 pub fn work_through(cache: &mut MutexGuard<Cache>) {
-    let mut metadata = Vec::new();
+    cache.category_cloud.clear();
+    cache.tag_cloud.clear();
+    cache.metadata.clear();
 
     let mut lasted: Option<i64> = None;
-
     fs::read_dir(PathBuf::from("blog")).unwrap()
         .into_iter()
         .filter(|dir| is_markdown(dir.as_ref().unwrap()))
@@ -55,8 +56,6 @@ pub fn work_through(cache: &mut MutexGuard<Cache>) {
 
             let md2 = post_md.clone();
             cache.metadata.insert(md2.name.clone(), md2);
-
-            metadata.push(post_md);
 
             let created = get_file_created(path);
             match lasted {

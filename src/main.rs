@@ -2,6 +2,7 @@ pub mod model;
 pub mod web;
 pub mod blog;
 mod setting;
+mod highlight;
 
 use std::net::SocketAddr;
 use std::str::FromStr;
@@ -60,7 +61,7 @@ async fn main() {
                 <div class="line"></div>
                 <br>
                 <center class="footer">
-                    <span>@{}; Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>; Powered by <a href="http://app.yeyanbo.cn/mini-blog">mini-blog</a>, rev 0.3</span>
+                    <span>@{}; Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>; Powered by <a href="http://app.yeyanbo.cn/mini-blog">mini-blog</a>, rev 0.3.6</span>
                     <span>{}</span>
                 </center>
                 <br>

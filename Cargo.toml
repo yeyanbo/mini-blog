@@ -18,12 +18,12 @@ handlebars = "4.3.7"
 chrono = { version = "0.4.26", features = ["serde"] }
 # 将Markdown转换为HTml
 pulldown-cmark = "0.9.3"
-# 为pulldown中的代码块增加语法高亮
-highlight-pulldown = "0.2.2"
 
 serde = { version = "1.0.183", features = ["derive"] }
 anyhow = "1.0.72"
 tower-http = { version = "0.4.3", features = ["fs"] }
 config = "0.13.3"
 str-utils = "0.1.7"
+thiserror = "1.0.48"
+syntect = "5.1.0"
 

@@ -195,7 +195,7 @@ code {
 pre>code {
     display: block;
     /* color: #839496; */
-    background-color: #272822;
+    /*background-color: #272822;*/
     padding: 10px;
     overflow-x: auto;
 }

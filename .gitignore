@@ -1,5 +1,6 @@
 .vscode
 .idea
 *.lock
+config_test.toml
 /blog
 /target

@@ -20,16 +20,17 @@ use tracing_subscriber::FmtSubscriber;
 async fn main() {
     //加载配置文件
     //如果配置文件内容错误，或者配置文件不存在，则应用默认配置项
-    let settings = Settings::new().unwrap_or(
-        Settings {
-            title: "Mini Blog".to_string(),
-            organization: "版权所属 2023-2024".to_string(),
-            record_number: "国家网站备案号".to_string(),
-            app_port: 3000,
-            log_level: "info".to_string(),
-            author: Author { title: "About Me".into(), description: vec![] }
-        }
-    );
+    let settings = Settings::new()
+        .unwrap_or(
+            Settings {
+                title: "Mini Blog".to_string(),
+                organization: "版权所属 2023-2024".to_string(),
+                record_number: "国家网站备案号".to_string(),
+                app_port: 3000,
+                log_level: "info".to_string(),
+                author: Author { title: "About Me".into(), description: vec![] }
+            }
+        );
 
     //启动日志
     let subscriber = FmtSubscriber::builder()
@@ -77,7 +78,7 @@ async fn main() {
                 <div class="line"></div>
                 <br>
                 <center class="footer">
-                    <span>@{}; Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>; Powered by <a href="http://app.yeyanbo.cn/mini-blog">mini-blog</a>, rev 0.3.6</span>
+                    <span>@{}; Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>; Powered by <a href="http://app.yeyanbo.cn/mini-blog">mini-blog</a>, rev 0.4.1</span>
                     <span>{}</span>
                 </center>
                 <br>

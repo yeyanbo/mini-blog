@@ -12,6 +12,7 @@
 
 # 开发计划
 
+- [x] 在博客文章后面增加了作者信息，可在配置文件中录入作者信息。 [add 0.2.0]
 - [x] 读取目录下的文件，形成目录页
 - [x] 读取Markdown文件，展示为Html页面
 - [x] 标签云（Tag）,同时支持按照指定标签进行过滤
@@ -31,7 +32,27 @@
 |--\static           //存储静态文件的目录，例如：css、js、templates等
 |  |--\css           //样式文件
 |  |--\templates     //模板
+|  |--\images        //图像，文章中的图像存储在此
+|  |--avator.png     //图像，作者的大头像
 |--mini-blog         //可执行的程序
+|--config.yml        //配置文件
+```
+
+## 配置信息
+
+```yml
+title: 博客标题
+organization: 组织名称 2023-2024
+record-number: 网站备案号
+author:
+  title: Aout Me
+  description:
+    - Description 1
+    - Description 2
+    - Description 3
+
+app-port: 3000
+log-level: info
 ```
 
 ## 执行

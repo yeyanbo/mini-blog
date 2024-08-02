@@ -2,7 +2,6 @@ pub mod model;
 pub mod web;
 pub mod blog;
 mod setting;
-mod highlight;
 
 use std::net::SocketAddr;
 use std::str::FromStr;
@@ -11,7 +10,8 @@ use axum::routing::get;
 use handlebars::Handlebars;
 use axum_template::engine::Engine;
 use model::AppState;
-use setting::Settings;
+use setting::{Author, Settings};
+use tokio::net::TcpListener;
 use tower_http::services::ServeDir;
 use tracing::Level;
 use tracing_subscriber::FmtSubscriber;
@@ -24,10 +24,10 @@ async fn main() {
         Settings {
             title: "Mini Blog".to_string(),
             organization: "版权所属 2023-2024".to_string(),
-            backup_number: "国家网站备案号".to_string(),
+            record_number: "国家网站备案号".to_string(),
             app_port: 3000,
             log_level: "info".to_string(),
-
+            author: Author { title: "About Me".into(), description: vec![] }
         }
     );
 
@@ -56,6 +56,22 @@ async fn main() {
 
     handlebars.register_partial("title", settings.title).unwrap();
 
+    let description = settings.author.description
+        .iter()
+        .map(|s| format!("<br><span>{}</span>", s))
+        .collect::<Vec<String>>()
+        .join("\n");
+
+    handlebars.register_partial("author", format!(r###"
+            <div class="author">
+				<p>
+                    <img src="../static/avator.png"/>
+                    <strong>{}</strong>
+                    {}
+                </p>
+			</div>
+        "###, settings.author.title, description)).unwrap();
+
     handlebars.register_partial("footer", format!(r###"
             <footer>
                 <div class="line"></div>
@@ -66,7 +82,7 @@ async fn main() {
                 </center>
                 <br>
             </footer>
-    "###, settings.organization, settings.backup_number)).unwrap();
+    "###, settings.organization, settings.record_number)).unwrap();
 
     // build our application with a single route
     let state = AppState::new(Engine::from(handlebars));
@@ -82,8 +98,10 @@ async fn main() {
     let addr = SocketAddr::from(([0, 0, 0, 0], settings.app_port));
     tracing::info!("监听器开始监听端口[{}]...", &addr);
 
-    axum::Server::bind(&addr)
-        .serve(app.into_make_service())
+    let listener = TcpListener::bind(addr)
+        .await
+        .unwrap();
+    axum::serve(listener, app.into_make_service())
         .await
         .unwrap();
 }

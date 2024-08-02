@@ -1,6 +1,12 @@
 title: 博客标题
 organization: 组织名称 2023-2024
-backup-number: 网站备案号
+record-number: 网站备案号
+author:
+  title: Aout Me
+  description:
+    - Description 1
+    - Description 2
+    - Description 3
 
 app-port: 3000
 log-level: info

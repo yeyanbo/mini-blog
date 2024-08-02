@@ -2,16 +2,22 @@ use config::{ConfigError, Config, File};
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
+pub struct Author {
+    pub title: String,
+    pub description: Vec<String>,
+}
+
+#[derive(Debug, Deserialize)]
 pub struct Settings {
     pub title: String,
     pub organization: String,
-    #[serde(rename="backup-number")]
-    pub backup_number: String,
+    #[serde(rename="record-number")]
+    pub record_number: String,
     #[serde(rename="app-port")]
     pub app_port: u16,
     #[serde(rename="log-level")]
     pub log_level: String,
-
+    pub author: Author,
 }
 
 impl Settings {

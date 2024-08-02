@@ -10,7 +10,7 @@ use anyhow::Ok;
 use pulldown_cmark::Parser;
 use pulldown_cmark::html;
 
-use crate::highlight::highlight_with_theme;
+// use crate::highlight::highlight_with_theme;
 use crate::model::{Cache, Post, PostMetadata};
 
 /// 判断是否需要重新加载所有的Markdown文件元数据
@@ -167,10 +167,10 @@ fn html_from_markdown(metadata: PostMetadata, lines: &Vec<String>) -> anyhow::Re
     }
 
     let parser = Parser::new(&markdown);
-    let events = highlight_with_theme(parser, "base16-mocha.dark").unwrap();
-
+    // let events = highlight_with_theme(parser, "base16-mocha.dark").unwrap();
+    let highlight = cmark_syntax::SyntaxPreprocessor::new(parser);
     let mut html_str = String::new();
-    html::push_html(&mut html_str, events.into_iter());
+    html::push_html(&mut html_str, highlight);
 
     post.content = html_str;
 

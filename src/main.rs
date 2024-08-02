@@ -18,6 +18,7 @@ use tracing_subscriber::FmtSubscriber;
 
 #[tokio::main]
 async fn main() {
+    let app_version = env!("CARGO_PKG_VERSION");
     //加载配置文件
     //如果配置文件内容错误，或者配置文件不存在，则应用默认配置项
     let settings = Settings::new()
@@ -78,12 +79,12 @@ async fn main() {
                 <div class="line"></div>
                 <br>
                 <center class="footer">
-                    <span>@{}; Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>; Powered by <a href="http://app.yeyanbo.cn/mini-blog">mini-blog</a>, rev 0.4.1</span>
+                    <span>@{}; Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>; Powered by <a href="http://app.yeyanbo.cn/mini-blog">mini-blog</a>, rev {}</span>
                     <span>{}</span>
                 </center>
                 <br>
             </footer>
-    "###, settings.organization, settings.record_number)).unwrap();
+    "###, settings.organization, app_version, settings.record_number)).unwrap();
 
     // build our application with a single route
     let state = AppState::new(Engine::from(handlebars));

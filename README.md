@@ -11,7 +11,11 @@
 无需重启服务，刷新页面即可查看新增的博客。
 
 # 开发计划
-
+- [ ] Add Code Copy for Code Block  [add 0.4.7]
+- [ ] Add Line Number for Code Block [add 0.4.7]
+- [ ] Add Toc for Blog Article  [add 0.4.7]
+- [ ] Add Section Number for Heading  [add 0.4.7]
+- [x] 集成`highlightjs`代码块语法高亮。 [add 0.4.4]
 - [x] 在博客文章后面增加了作者信息，可在配置文件中录入作者信息。 [add 0.4.0]
 - [x] 读取目录下的文件，形成目录页
 - [x] 读取Markdown文件，展示为Html页面
@@ -31,6 +35,7 @@
 |--\blog             //存储Markdown文件的目录
 |--\static           //存储静态文件的目录，例如：css、js、templates等
 |  |--\css           //样式文件
+|  |--\js            //脚本文件
 |  |--\templates     //模板
 |  |--\images        //图像，文章中的图像存储在此
 |  |--avator.png     //图像，作者的大头像

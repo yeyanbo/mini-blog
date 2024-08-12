@@ -29,6 +29,10 @@ header>a {
     text-decoration: none;
 }
 
+img {
+    max-width: 100%;
+}
+
 .category-list {
     font-size: medium;
     color: #f6f6ef;
